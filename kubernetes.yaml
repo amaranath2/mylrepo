@@ -1,4 +1,21 @@
-apiVersion: v1
-kind: namespace
+appiVersion: v1
+kind: Deployment
 metadate:
-  name: testns
+  name: javaappdeployment
+spec:
+  replicas: 2
+  selector: 
+    app: javawebapp
+  strategy: ReCreate
+  template:
+    metadata:
+      name: javaapppod
+      labels: 
+        app: javawebapp
+      spec:
+        containers:
+        - name: javappcontainer
+          image: amaranath2/java-web-app:2
+          ports:
+          - containerPort: 8080
+
